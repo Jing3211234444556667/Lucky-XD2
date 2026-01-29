@@ -10,7 +10,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -29,5 +28,13 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+    - name: Install PM2
+      run: npm install -g pm2
+
     - name: Start application
-      run: npm start
+      run: pm2-runtime start index.js --name LUCKY-XD
+      env:
+        # If your bot requires specific Env Vars (like MEGA_EMAIL), 
+        # add them here using GitHub Secrets:
+        # MEGA_EMAIL: ${{ secrets.MEGA_EMAIL }}
+        NODE_ENV: production
